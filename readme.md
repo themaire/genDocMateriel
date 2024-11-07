@@ -7,3 +7,5 @@ Au demarrage du script Flask, les données sont rapatriés en mémoire. La route
 Pour visualiser une fiche il suffit de se rendre de taper le type de fiche ( mobile ou info) et les initiales de la personne par exemple : /info/ab.
 
 Le fichier Dockerfile permet de fabriquer l'image adequat prendant en compte les dépendances à utiliser.
+
+Le script makePdf.py permet de generer des pdfs par lot.
