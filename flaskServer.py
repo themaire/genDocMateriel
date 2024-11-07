@@ -171,7 +171,7 @@ def refresh():
 
 @app.route('/list')
 def list():
-    
+    refreshData()
     return render_template('list_salaries.html', attributions=allAttribs)
 
 @app.route('/info/<id>')
