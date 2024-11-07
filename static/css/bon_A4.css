@@ -1,0 +1,189 @@
+.a {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+.a .div {
+    background-color: #ffffff;
+    overflow: hidden;
+    width: 650px;
+    height: 1060px;
+    position: relative;
+}
+
+.a .header {
+    position: absolute;
+    width: 650px;
+    height: 81px;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+}
+
+.a .logo-CEN {
+    position: absolute;
+    width: 222px;
+    height: 64px;
+    top: 17px;
+    left: 19px;
+    object-fit: cover;
+}
+
+.a .titre {
+    position: absolute;
+    width: 650px;
+    height: 89px;
+    top: 81px;
+    left: 0px;
+}
+
+.a .text-titre {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: "Actor-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.a .corps {
+    position: absolute;
+    width: 600px;
+    height: 810px;
+    top: 170px;
+    left: 30px;
+    background-color: #f1f1f1;
+}
+
+.a .nom {
+    position: absolute;
+    width: 600px;
+    height: 43px;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.a .bloc-fixe {
+    position: absolute;
+    width: 530px;
+    height: 700px;
+    top: 43px;
+    left: 34px;
+    background-color: #e8e8e8;
+    text-align: justify;
+}
+
+.a .text-haut {
+    position: absolute;
+    width: 500px;
+    top: 0px;
+    left: 13px;
+    font-family: "Actor-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.a .frame-materiel {
+    position: absolute;
+    width: 450px;
+    height: 300px;
+    top: 90px;
+    left: 40px;
+}
+
+.a .liste-materiel {
+    /* width: 400px; */
+    /* top: 2px; */
+    /* left: 45px; */
+    font-family: "Akshar-Regular", Akshar;
+    /* font-weight: 400; */
+    color: #000000;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 18px;
+    background-color: #cacaca;
+}
+
+.a .text-bas {
+    position: absolute;
+    width: 500px;
+    bottom: 0px;
+    left: 11px;
+    font-family: "Actor-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+
+
+.a .date-de-remise {
+    position: absolute;
+    top: 15px;
+    left: 17px;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 10px;
+    text-align: right;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.a .span {
+    font-weight: 700;
+}
+
+.a .name_date-normal {
+    font-family: "Inter-Regular", Helvetica;
+}
+
+.a .prenom-et-nom {
+    position: relative;
+    top: -10px;
+    left: 0;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.a .footer {
+    position: absolute;
+    width: 650px;
+    height: 81px;
+    bottom: 0px;
+    left: 0;
+    background-color: transparent;
+}
+
+.a .text-footer {
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 10px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+  
+  
+  

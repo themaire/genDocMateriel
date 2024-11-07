@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Remise informatique</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bon_A4.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/A4.css') }}">
+  </head>
+  <body style="--bleeding: 0.5cm;--margin: 1cm;">
+    <div class="a page">
+      <div class="div">
+        <header class="../header/">
+          <a href="refresh.html">
+            <img class="logo-CEN" src="{{ url_for('static', filename='img/CEN_Champagne-Ardenne_RVB.jpg') }}" />
+          </a>
+        </header>
+
+        <div class="titre">
+            <p class="text-titre">
+                Bon de mise à disposition de matériel.<br />
+                INFORMATIQUE</p>
+          </div>
+        
+        <div class="corps">
+          <div class="nom">
+              <p class="prenom-et-nom">
+                  <span class="span">Prénom et Nom :</span> <span class="name_date-normal"> {{ attribs[0]['salarie'] }}</span>
+              </p>
+          </div>
+          <div class="bloc-fixe">
+            <p class="text-haut">
+                Afin de mener à bien vos missions, le Conservatoire d'Espaces Naturels Champagne-Ardenne (CENCA) vous
+                confie, pendant toute la durée de votre contrat de travail, le matériel suivant :
+            </p>
+
+            <div class="frame-materiel">
+              {% for attrib in attribs %}
+
+                  <div class="liste-materiel">
+
+                    <p>
+                      <span class="span">
+                      {% if attrib['Type materiel'] == "Ordinateur" %}
+                        Date de remise d'un ordinateur : 
+                      {% else %}
+                        Date de remise de materiel informatique : 
+                      {% endif %}
+                      </span>
+                          
+                      <span class="name_date-normal">
+                          {% if attrib['date'] %}
+                            {{ attrib['date'] }}
+                          {% else %}
+                            <i>date ou a defaut l'année de la mise à disposition : </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/20
+                          {% endif %}
+                      </span>
+                    </p>
+
+                    {% for modele in attrib['modele'] %}
+
+                        <span>{{ modele['nom'] | trim }} 
+                          {% if modele['specs'] != '' %}
+                            ({{ modele['specs'] | trim }})
+                          {% endif %}
+                        </span>
+
+                        {% if 'Ordinateur' in modele['type'] %}
+                            {% if attrib['serial'] %}
+                                  <span>(SN : {{ attrib['serial'] | trim }})</span>
+                            {% else %}
+                                <span>(SN : .....................)</span>
+                            {% endif %}
+                        {% endif %}
+
+                        <br />
+                    {% endfor %}
+
+                  </div>
+              {% endfor %}
+
+            </div>
+
+            <p class="text-bas">
+              Ce matériel demeure la propriété de l’entreprise.<br /><br />
+              
+              Vous êtes tenu de maintenir cet outil de
+              travail dans un parfait état de fonctionnement. Dans le cas où vous rencontreriez des difficultés,
+              veuillez en avertir votre hiérarchie ou la personne chargé de la gestion du matériel informatique.<br /><br />
+              
+              Par ce présent bon de mise à disposition, vous vous engagez à restituer l&#39;intégralité du matériel ainsi
+              confié au moment de la rupture de ses relations contractuelles avec le CENCA et ce, quel que soit le motif
+              de cette rupture.<br /><br />
+
+              Par la présente attestation contresignée de remise de matériel, vous vous
+              engagez à restituer tout matériel confié cité ci-dessus à l’entreprise au CENCA <br />en bon état
+              le&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+              <br />
+
+              Veuillez signer cette attestation, précédé de la date et de la mention "lu et approuvé".
+            </p>
+              
+          </div>
+          
+        </div>
+        
+        <footer class="footer">
+          <p class="text-footer">
+            Conservatoire d’Espaces Naturels Champagne-Ardenne<br />9 rue Gustave Eiffel - 10430 -
+            Rosières-près-Troyes<br /><br />Fichier auto-généré - 2024 - NE
+          </p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
