@@ -1,9 +1,13 @@
 import os
+import sys
 import locale
+from datetime import datetime
 locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
+
+CURRENT_YEAR = datetime.now().year
 
 ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 BASE_ID = os.getenv("BASE_ID")
@@ -18,9 +22,37 @@ api = Api(ACCESS_TOKEN)
 
 # Functions
 def getSalaries(table):
+    """
+    Fonction pour récupérer les informations des salariés à partir d'une table Airtable.
+    Cette fonction construit un dictionnaire contenant les informations des salariés actifs.
+
+    Args:
+        table (list): Liste des enregistrements de la table Airtable.
+
+    Returns:
+        dict: Dictionnaire contenant les informations des salariés avec leur ID comme clé.
+    """
+    print("Fonction getSalarie( contenu de la table des salaries ) ")
     salaries = {}
-    for salarie in table:
-        salaries[salarie['id']] = {'nom' : salarie['fields']['prenom'] + ' ' + salarie['fields']['nom'].upper(), 'cd_salarie' : salarie['fields']['cd_salarie']}
+    try:
+        # Parcourt chaque enregistrement de la table
+        for salarie in table:
+            print(salarie)
+            # Vérifie si le champ 'cd_salarie' est présent dans les données
+            if 'cd_salarie' in salarie['fields']:
+                # Ajoute les informations du salarié au dictionnaire
+                salaries[salarie['id']] = {
+                    'nom': salarie['fields']['prenom'] + ' ' + salarie['fields']['nom'].upper(),
+                    'cd_salarie': salarie['fields']['cd_salarie']
+                }
+            else:
+                # Si 'cd_salarie' est manquant, lève une exception avec un message d'erreur
+                full_name = salarie['fields']['prenom'] + ' ' + salarie['fields']['nom'].upper()
+                raise ValueError(f"La chaîne '{full_name}' n'a pas de cd_salarie.")
+    except Exception as e:
+        # Capture et affiche les erreurs, puis arrête le programme
+        print("Erreur dans la fonction getSalaries : ", e)
+        sys.exit(1)  # Arrête le programme avec un code d'erreur
     return salaries
 
 def getEquipements(table):
@@ -54,7 +86,8 @@ def getAttribution(table, equipements, salaries, type):
         # Traitement si un employé est assigné sinon on "continue"
 
             # print("attribution['fields']['Employé désigné'][0] =", attribution['fields']['Employé désigné'][0])
-
+            print("On s'occupe de l'employé", salaries[  attribution['fields']['Employé désigné'][0]  ])
+            print("On s'occupe de l'employé", salaries[  attribution['fields']['Employé désigné'][0]  ]['nom'])
             attrib['cd_salarie'] = salaries[  attribution['fields']['Employé désigné'][0]  ]['cd_salarie']
 
             if(attribution['fields']['Employé désigné'][0] in salaries.keys()):
@@ -138,11 +171,14 @@ def refreshData():
     tableEquipements = api.table(INVENTORY_ID, 'Equipements')
     equipements = tableEquipements.all()
 
-    salaries = getSalaries(tableSalarieAntenne.all(formula="{statut}"))
+    # salaries = getSalaries(tableSalarieAntenne.all(formula="{statut}"))
+    salaries = getSalaries(tableSalarieAntenne.all(view="Personnes actives"))
+
     # print("Liste des", len(salaries), "salaries :", salaries)
     # print()
 
     equipements = getEquipements(tableEquipements.all())
+    
     # print("Liste des", len(equipements), "equipements :", equipements)
     # print()
 
@@ -162,11 +198,14 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+@app.context_processor
+def inject_current_year():
+    return {'current_year': CURRENT_YEAR}
+
 @app.route('/refresh')
 def refresh():
 
     refreshData()
-    
     return render_template('refresh.html')
 
 @app.route('/list')

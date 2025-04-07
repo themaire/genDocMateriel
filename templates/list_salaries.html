@@ -23,7 +23,7 @@
             <ul>
                 {% for key in attributions.keys() %}
                     {% for i in attributions[key] %}
-                        <li><a href='http://192.168.1.50/info/{{ i['cd_salarie'] }}'>{{ i['cd_salarie'] }}</a></li>
+                        <li><a href='http://192.168.1.50:85/info/{{ i['cd_salarie'] }}'>{{ i['cd_salarie'] }}</a></li>
                     {% endfor %}
                 {% endfor %}
             </ul>
@@ -35,7 +35,7 @@
         <footer class="footer">
           <p class="text-footer">
             Conservatoire d’Espaces Naturels Champagne-Ardenne<br />9 rue Gustave Eiffel - 10430 -
-            Rosières-près-Troyes<br /><br />Fichier auto-généré - 2024 - NE
+            Rosières-près-Troyes<br /><br />Fichier auto-généré - {{ current_year }} - NE
           </p>
         </footer>
       </div>

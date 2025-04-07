@@ -8,4 +8,5 @@ docker build -t gendocs:v1.0 .
 docker images
 
 #docker run -d --name gen-documents-materiel -p 85:5000 gendocs:v1.0
-docker run -d --name gen-documents-materiel -p 85:5000 --restart always gendocs:v1.0
+#docker run -d --name gen-documents-materiel -p 85:5000 --restart always gendocs:v1.0
+docker run -d --name gen-documents-materiel -p 85:5000 --restart unless-stopped gendocs:v1.0
